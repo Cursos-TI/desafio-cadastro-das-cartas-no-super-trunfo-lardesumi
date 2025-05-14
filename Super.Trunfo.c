@@ -13,8 +13,7 @@ int main() {
     float pibPerCapita1, pibPerCapita2;
     float superPoder1, superPoder2;
 
-    // Entrada de dados para Carta 1 
-
+    // Entrada de dados para Carta 1
     printf("\n=== Cadastro da Carta 1 ===\n");
     printf("Estado (ex: SP, MG, RJ): ");
     scanf("%2s", estado1);
@@ -37,14 +36,11 @@ int main() {
     printf("Número de pontos turísticos: ");
     scanf("%d", &pontos1);
 
-    printf("Densidade populacional (hab/km²): ");
-    scanf("%f", &densidade1);
+    // Cálculo automático da densidade e do PIB per capita
+    densidade1 = populacao1 / area1;
+    pibPerCapita1 = (pib1 * 1000000000) / populacao1; // PIB em reais
 
-    printf("PIB per capita (reais): ");
-    scanf("%f", &pibPerCapita1);
-
-    // Entrada de dados para Carta 2 
-
+    // Entrada de dados para Carta 2
     printf("\n=== Cadastro da Carta 2 ===\n");
     printf("Estado (ex: SP, MG, RJ): ");
     scanf("%2s", estado2);
@@ -67,13 +63,11 @@ int main() {
     printf("Número de pontos turísticos: ");
     scanf("%d", &pontos2);
 
-    printf("Densidade populacional (hab/km²): ");
-    scanf("%f", &densidade2);
+    // Cálculo automático da densidade e do PIB per capita
+    densidade2 = populacao2 / area2;
+    pibPerCapita2 = (pib2 * 1000000000) / populacao2; // PIB em reais
 
-    printf("PIB per capita (reais): ");
-    scanf("%f", &pibPerCapita2);
-
-    // Cálculo do Super Poder (usando os dados fornecidos)
+    // Cálculo do Super Poder (como você já tinha)
     superPoder1 = populacao1 + area1 + pib1 + pontos1 + pibPerCapita1 + (1 / densidade1);
     superPoder2 = populacao2 + area2 + pib2 + pontos2 + pibPerCapita2 + (1 / densidade2);
 
@@ -90,8 +84,6 @@ int main() {
     printf("PIB per capita: %.2f reais\n", pibPerCapita1);
     printf("Super Poder: %.2f\n", superPoder1);
 
-    printf("\n");
-
     printf("\n**** Carta 2 (%s): ****\n", estado2);
     printf("Cidade: %s\n", nomeCidade2);
     printf("População: %lu\n", populacao2);
@@ -102,22 +94,23 @@ int main() {
     printf("PIB per capita: %.2f reais\n", pibPerCapita2);
     printf("Super Poder: %.2f\n", superPoder2);
 
-    printf("\n");
+    // ====================================
+    // AQUI ENTRA O NOVO DESAFIO DE LOGICA
+    // ====================================
 
-    printf("\n=== Comparação de Cartas ===\n");
+    // Comparação de cartas com base em UM atributo (ex: População)
+    printf("\n=== Comparação de Cartas (Atributo: População) ===\n");
 
-    printf("População: %s venceu (%d)\n", (populacao1 > populacao2 ? "Carta 1" : "Carta 2"), 
-    populacao1 > populacao2);
-    printf("Área: %s venceu (%d)\n", (area1 > area2 ? "Carta 1" : "Carta 2"), area1 > area2);
-    printf("PIB: %s venceu (%d)\n", (pib1 > pib2 ? "Carta 1" : "Carta 2"), pib1 > pib2);
-    printf("Pontos Turísticos: %s venceu (%d)\n", (pontos1 > pontos2 ? "Carta 1" : "Carta 2"), 
-    pontos1 > pontos2);
-    printf("Densidade Populacional: %s venceu (%d)\n", (densidade1 < densidade2 ? "Carta 1" : "Carta 2"), 
-    densidade1 < densidade2);
-    printf("PIB per Capita: %s venceu (%d)\n", (pibPerCapita1 > pibPerCapita2 ? "Carta 1" : "Carta 2"), 
-    pibPerCapita1 > pibPerCapita2);
-    printf("Super Poder: %s venceu (%d)\n", (superPoder1 > superPoder2 ? "Carta 1" : "Carta 2"), 
-    superPoder1 > superPoder2);
+    printf("\nCarta 1 - %s (%s): %lu habitantes", nomeCidade1, estado1, populacao1);
+    printf("\nCarta 2 - %s (%s): %lu habitantes\n", nomeCidade2, estado2, populacao2);
+
+    if (populacao1 > populacao2) {
+        printf("Resultado: Carta 1 (%s) venceu!\n", nomeCidade1);
+    } else if (populacao2 > populacao1) {
+        printf("Resultado: Carta 2 (%s) venceu!\n", nomeCidade2);
+    } else {
+        printf("Resultado: Empate!\n");
+    }
 
     return 0;
 }
